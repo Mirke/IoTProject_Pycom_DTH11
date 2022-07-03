@@ -42,17 +42,17 @@ class DHT:
         data = pycom.pulses_get(self.__pin,100)
         self.__pin.init(Pin.OPEN_DRAIN)
         self.__pin(1)
-        print(data)
+        #print(data)
         bits = []
         for a,b in data:
         	if a ==1 and 18 <= b <= 28:
         		bits.append(0)
         	if a ==1 and 65 <= b <= 75:
         		bits.append(1)
-        print("longueur bits : %d " % len(bits))
+        #print("longueur bits : %d " % len(bits))
         if len(bits) != 40:
             return DHTResult(DHTResult.ERR_MISSING_DATA, 0, 0)
-        print(bits)
+        #print(bits)
         # we have the bits, calculate bytes
         the_bytes = self.__bits_to_bytes(bits)
         # calculate checksum and check
@@ -84,7 +84,7 @@ class DHT:
             if ((i + 1) % 8 == 0):
                 the_bytes.append(byte)
                 byte = 0
-        print(the_bytes)
+        #print(the_bytes)
         return the_bytes
 
     def __calculate_checksum(self, the_bytes):
